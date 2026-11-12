@@ -1,0 +1,5 @@
+# AI公众号信息源：gzh_feed 工具（爆款扫描+聚类+深色 HTML 日报）+ gzh-ai-feed 技能 + 侧栏看板。
+# 浏览器半边由 dsh.client 声明加载。
+- insert:
+    - id: gzh-ai-feed
+      name: 'dsh-gzh-ai-feed'

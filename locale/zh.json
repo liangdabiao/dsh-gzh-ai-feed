@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "AI公众号信息源",
+    "description": "每日扫描AI相关公众号按互动量发现爆款文章，智能聚类生成深色主题 HTML 日报。支持自定义关键词分页扫描。需 RedFox API Key。"
+  }
+}
