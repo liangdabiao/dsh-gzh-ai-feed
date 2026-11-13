@@ -1,11 +1,11 @@
 ---
 name: gzh-ai-feed
-description: AI公众号信息源 — Daily scan of AI WeChat public accounts, finding the hottest articles by engagement, auto-clustering into topics, and generating a styled HTML report with cover images and metrics. Use when the user wants AI daily reports, 公众号爆款, AI content curation, 每日AI热点, or 公众号日报.
+description: 公众号爆款雷达 — 按关键词翻页扫描公众号爆款文章（默认 AI 词表，可换任意关键词），按互动总量发现最火文章、智能聚类生成深色主题 HTML 日报（封面图+互动数据+文章直链）。Use when the user wants hot WeChat official-account articles, 公众号爆款, keyword-based WeChat article research, or 公众号热点追踪.
 ---
 
-# AI公众号信息源
+# 公众号爆款雷达
 
-每日自动扫描全网 AI 公众号，按互动总量找出最火的爆款内容，智能聚类后生成深色主题 HTML 日报。
+按关键词翻页扫描公众号爆款文章（默认 AI 词表），按互动总量找出最火内容，智能聚类后生成深色主题 HTML 日报。
 
 ## 数据口径（重要）
 
@@ -28,5 +28,5 @@ description: AI公众号信息源 — Daily scan of AI WeChat public accounts, f
 
 ## 面板
 
-- 侧栏「AI公众号信息源」面板：直查日报（关键词/条数）、分类卡片（公众号封面缩略图+互动数据+文章直链）、深色主题 HTML 日报、历史归档。
+- 侧栏「公众号爆款雷达」面板：直查日报（关键词/条数）、分类卡片（公众号封面缩略图+互动数据+文章直链）、深色主题 HTML 日报、历史归档。
 - 深挖话题时引导用户「去对话深挖」，agent 按调查模式做延伸搜索。

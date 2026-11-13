@@ -1,4 +1,4 @@
-// AI公众号信息源 · Host 半边（gzh_feed 原生工具 + gzh-ai-feed 技能提供方 + 硬规则注入 + 面板数据面）。
+// 公众号爆款雷达 · Host 半边（gzh_feed 原生工具 + gzh-ai-feed 技能提供方 + 硬规则注入 + 面板数据面）。
 // 翻页扫描约 10-30 秒（首词深翻 5 页 + 后续词 2 页 + 0.5s 页间隔）；聚类与呈现由会话模型按技能完成。
 import Schema from '@deepseek-ai/schemastery'
 import { join, dirname } from 'node:path'
@@ -63,7 +63,7 @@ const result = (ok, summary, data = '', footer = '') => ({ ok, summary, data, fo
 const MAX_TEXT = 58000
 
 function buildFooter(meta) {
-  return `📰 数据源：redfox.hk API（AI公众号信息源）· ${meta.date} 标注 · 扫描 ${meta.total} 篇 · 聚类 ${meta.topic_count} 类 · 记录 ${meta.feed_id}`
+  return `📰 数据源：redfox.hk API（公众号爆款雷达）· ${meta.date} 标注 · 扫描 ${meta.total} 篇 · 聚类 ${meta.topic_count} 类 · 记录 ${meta.feed_id}`
 }
 
 // 单篇文章行（模型可读）
@@ -78,7 +78,7 @@ function renderRow(a, idx) {
 export const gzhFeedTool = {
   name: 'gzh_feed',
   description:
-    'AI公众号信息源：每日扫描AI相关公众号，按互动总量（点赞+评论+分享）发现爆款文章，智能聚类话题，产出深色主题 HTML 日报（封面图+互动数据+文章直链）。支持自定义关键词（如 "AI Agent,RAG,LangChain"）。' +
+    '公众号爆款雷达：每日扫描AI相关公众号，按互动总量（点赞+评论+分享）发现爆款文章，智能聚类话题，产出深色主题 HTML 日报（封面图+互动数据+文章直链）。支持自定义关键词（如 "AI Agent,RAG,LangChain"）。' +
     '接口抓全库热门内容（无日期过滤），日报日期仅作标注（今天16:00后标注昨天，否则标注前天）。' +
     '需要 RedFox API Key（面板「设置」页或环境变量 REDFOX_API_KEY）。',
   parameters: {
@@ -102,7 +102,7 @@ export const gzhFeedTool = {
     if (args.action === 'fetch') {
       const opts = feedOpts({ settings: getSettings(), config: cfg })
       if (!opts.apiKey) {
-        return result(false, '未配置 RedFox API Key。请用户到面板「AI公众号信息源 → 设置」填入，或在插件配置/环境变量 REDFOX_API_KEY 里配置（获取：https://redfox.hk/settings/api-keys?source=github）。')
+        return result(false, '未配置 RedFox API Key。请用户到面板「公众号爆款雷达 → 设置」填入，或在插件配置/环境变量 REDFOX_API_KEY 里配置（获取：https://redfox.hk/settings/api-keys?source=github）。')
       }
       const count = Math.min(Math.max(Number(args.count) || 200, 20), 200)
       const data = await fetchFeed({ date: args.date, keywords: args.keywords, count, ...opts })
@@ -110,7 +110,7 @@ export const gzhFeedTool = {
       if (!data.articles.length) {
         return result(false,
           `关键词 ${data.keywords.join('/')} 暂无内容。可建议用户更换关键词；不要自动改查其他关键词。`,
-          '', `📰 数据源：redfox.hk API（AI公众号信息源）· 0 篇`)
+          '', `📰 数据源：redfox.hk API（公众号爆款雷达）· 0 篇`)
       }
 
       const meta = saveFeed(data)
@@ -121,7 +121,7 @@ export const gzhFeedTool = {
       // 分类概览 + 各类头部文章
       const total = data.articles.length
       const overview = [
-        `## AI公众号信息源 · ${data.date} 日报`,
+        `## 公众号爆款雷达 · ${data.date} 日报`,
         '',
         `**扫描 ${total} 篇热门文章（互动总量口径），聚类 ${data.clusters.length} 个分类**`,
         '',
@@ -148,7 +148,8 @@ export const gzhFeedTool = {
 
       const summary =
         `已入库（feedId=${meta.feed_id}）。${data.date} 标注 · ${total} 篇 · ${data.clusters.length} 类。` +
-        `向用户输出：分类概览表 → 各分类头部文章列表（含链接与互动数据）→ 日报地址 ${reportFile}。` +
+        `向用户输出：分类概览表 → 各分类头部文章列表（含链接与互动数据）。` +
+        `桌面端 WebContentsView 会 deny window.open/target=_blank，报告只能在面板内查看——告诉用户点侧栏「公众号爆款雷达」的报告页/详情页（HTML 日报记录 ${meta.feed_id}，磁盘文件 ${reportFile}），不要把磁盘路径当成可点开的入口。` +
         `爆款口径是互动总量（接口不返回阅读数），如实转述。`
 
       return result(true, summary, overview.slice(0, MAX_TEXT), buildFooter(pm))

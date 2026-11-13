@@ -1,7 +1,7 @@
 {
   "name": "dsh-gzh-ai-feed",
   "version": "0.1.0",
-  "description": "AI公众号信息源 · 每日扫描AI相关公众号按互动量发现爆款文章，智能聚类话题后生成深色主题 HTML 日报（封面图+互动数据+文章直链）。支持自定义关键词分页扫描。需 RedFox API Key，移植自 redfox-community skills/gzh-ai-feed。",
+  "description": "公众号爆款雷达 · 按关键词翻页扫描公众号爆款文章（默认 AI 词表，可换任意关键词），按互动总量排序、智能聚类话题后生成深色主题 HTML 日报（封面图+互动数据+文章直链）。需 RedFox API Key，移植自 redfox-community skills/gzh-ai-feed。",
   "license": "MIT",
   "type": "module",
   "main": "src/host.js",

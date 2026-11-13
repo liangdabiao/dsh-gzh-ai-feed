@@ -1,4 +1,4 @@
-/* AI公众号信息源 · 插件页面。瑞士风设计系统（与 cn30 同族）：强调色 = 公众号绿 #07c160。 */
+/* 公众号爆款雷达 · 插件页面。瑞士风设计系统（与 cn30 同族）：强调色 = 公众号绿 #07c160。 */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; border-radius: 0; }
 :root {
   color-scheme: light;
@@ -217,7 +217,7 @@ svg.ic { width: 16px; height: 16px; flex: none; stroke: currentColor; fill: none
   .stat:nth-child(4) { border-top: 1px solid var(--line-subtle); }
 }
 
-/* ---------- B站AI信息源专属 ---------- */
+/* ---------- B站爆款雷达专属 ---------- */
 /* 可信度徽章 */
 .cred-chips { display: flex; gap: var(--sp-2); flex-wrap: wrap; font-family: var(--font-mono); font-size: 11px; }
 .cred-chip { padding: 2px 8px; border: 1px solid var(--line); color: var(--text-secondary); }

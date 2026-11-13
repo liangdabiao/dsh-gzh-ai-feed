@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "WeChat AI Feed",
-    "description": "Daily scan of AI WeChat official accounts: engagement-based discovery, topic clustering, dark-theme HTML digest. Custom keyword paging supported. Requires RedFox API Key."
+    "title": "WeChat Viral Radar",
+    "description": "WeChat viral radar: keyword-based paging scan of viral WeChat official-account articles (AI word list by default, any keyword supported), engagement ranking, clustering, dark-theme HTML digest. Requires a RedFox API key."
   }
 }

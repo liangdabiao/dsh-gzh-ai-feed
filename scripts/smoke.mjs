@@ -78,7 +78,7 @@ let fid
   check('fetch 文章链接', r.data.includes('mp.weixin.qq.com/s/g1'), '')
   check('fetch 翻页去重', !r.data.includes('翻页文章7') || r.summary.includes('篇'), '') // 翻页文章应可出现（第2页有效数据）
   check('fetch 重复率换词', r.summary.includes('篇') && !r.summary.includes('0 篇'), '')
-  check('fetch 页脚', (r.footer || '').includes('AI公众号信息源') && (r.footer || '').includes(fid), (r.footer || '').slice(0, 80))
+  check('fetch 页脚', (r.footer || '').includes('公众号爆款雷达') && (r.footer || '').includes(fid), (r.footer || '').slice(0, 80))
 }
 {
   const r = await call({ action: 'fetch', keywords: 'RAG,LangChain', count: 50 })

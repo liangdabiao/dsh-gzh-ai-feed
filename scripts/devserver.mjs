@@ -1,4 +1,4 @@
-// 开发预览：把B站AI信息源面板跑在独立 http 服务上（复用 lib/api.js 路由 + 真实数据）。
+// 开发预览：把公众号爆款雷达面板跑在独立 http 服务上（复用 lib/api.js 路由 + 真实数据）。
 //   DSH_HOME=<数据目录> node scripts/devserver.mjs [port]   默认 5195
 // 想连真实 API 就在数据目录 settings.json 里放 api_key（npm run live 会自动写入）。
 import { createServer } from 'node:http'

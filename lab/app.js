@@ -1,4 +1,4 @@
-// AI公众号信息源 · 面板逻辑：概览（抓日报表单+历史）/ 详情页（分类卡片 + 视频列表 + 情报调查两个视图）/ 设置。
+// 公众号爆款雷达 · 面板逻辑：概览（抓日报表单+历史）/ 详情页（分类卡片 + 视频列表 + 情报调查两个视图）/ 设置。
 // 「去对话深挖」走 agent：嵌入 dsh → postMessage（client.js startSession，有 start-ok 握手）。
 // ⚠️日期规则：全库热门 · 日期仅标注数据——请求无数据日期时面板直接提示切换（不调接口）。
 (() => {
@@ -39,6 +39,32 @@
     const body = await res.json().catch(() => ({}))
     if (!res.ok) throw new Error(body.error || `HTTP ${res.status}`)
     return body
+  }
+
+  // 打开外部链接：桌面端 iframe 里 window.open 会被 WebContentsView deny，
+  // 先请宿主用系统默认浏览器打开；宿主不支持（网页版/无桌面）时退回新窗口。
+  async function openLink(u) {
+    if (!u || u === '#' || u === 'about:blank') return
+    try {
+      const r = await apiPost('/api/open', { url: u })
+      if (r?.ok) { toast('已在系统浏览器打开'); return }
+      throw new Error(r?.error || '打开失败')
+    } catch (e) {
+      const win = window.open(u, '_blank', 'noopener')
+      if (!win) {
+        const hint = /404|not found/i.test(String(e.message))
+          ? '宿主还没重启（/api/open 未上线），重启 dsh 后就能用系统浏览器打开'
+          : e.message
+        toast(`链接打不开：${hint}`, true)
+      }
+    }
+  }
+
+  // 面板里的外链一律交给系统浏览器（桌面端 <a target="_blank"> 同样会被 deny）
+  function bindExternalLinks() {
+    document.querySelectorAll('a[target="_blank"]').forEach((a) => {
+      a.onclick = (e) => { e.preventDefault(); e.stopPropagation(); openLink(a.getAttribute('href')) }
+    })
   }
 
   let toastTimer = null
@@ -111,7 +137,7 @@
 
   function digPrompt(feed) {
     return [
-      `请深挖 AI公众号信息源 ${feed.date} 日报里的热门话题：`,
+      `请深挖 公众号爆款雷达 ${feed.date} 日报里的热门话题：`,
       `1. bili_feed(action="get", feedId="${feed.feed_id}") 补读条目`,
       '2. 选 1-2 个我感兴趣的话题，按 gzh-ai-feed 技能的调查模式（竞品/舆情/人物/验证）用可用搜索工具做多引擎交叉验证',
       '3. 输出结构化调查报告（发现带来源+可信度标注 ✅⚠️❌🔍，信息源 A/B/C/D 分级）。',
@@ -190,6 +216,7 @@
             ${v.url ? `<a class="p-go" href="${esc(v.url)}" target="_blank" rel="noreferrer" title="查看视频">${ic('ext')}</a>` : ''}
           </div>`).join('')}</div>
       </div>`).join('')
+    bindExternalLinks()
   }
 
   async function viewFeed(id) {
@@ -379,6 +406,7 @@
 
   // ---------- 渲染辅助 ----------
   function bindCommon() {
+    bindExternalLinks()
     document.querySelectorAll('[data-open-report]').forEach((b) => {
       b.onclick = () => { openReportView(b.dataset.openReport) }
     })
@@ -438,6 +466,12 @@
     }
     render().catch(() => {})
   }
+  // 报告 iframe 里的链接点击会 postMessage 过来，统一交给 openLink 走系统浏览器
+  addEventListener('message', (e) => {
+    if (e.origin !== location.origin) return
+    const m = e.data
+    if (m && m.type === 'dsh:open-link' && typeof m.url === 'string') openLink(m.url)
+  })
   addEventListener('hashchange', () => { state.view = 'cards'; render() })
   boot()
   setTimeout(() => { if (!state.catalog?.version || state.catalog.version === '-') boot() }, 2500)

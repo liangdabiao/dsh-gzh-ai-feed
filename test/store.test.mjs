@@ -54,7 +54,7 @@ test('listReports：按 mode 过滤不需要（gzh 单模式），resolveFeed �
 test('report.html 落盘 + formatDigestHtml（gzh 占位符）', () => {
   const meta = listFeeds()[0]
   const raw = getRaw(meta.feed_id)
-  const html = formatDigestHtml({ dateStr: raw.date, articles: raw.articles, clusters: raw.clusters, source: 'AI公众号信息源-dsh' })
+  const html = formatDigestHtml({ dateStr: raw.date, articles: raw.articles, clusters: raw.clusters, source: '公众号爆款雷达-dsh' })
   assert.ok(html.includes('category-card'))
   assert.ok(html.includes('文章一'))
   assert.ok(html.includes('mmbiz.qpic.cn/1.jpg'))
