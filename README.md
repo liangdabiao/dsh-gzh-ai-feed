@@ -1,6 +1,7 @@
 # dsh-gzh-ai-feed · 公众号爆款雷达
 
 > 每日自动扫描全网 AI 公众号，按互动总量找出最火的爆款文章，智能聚类后生成深色主题 HTML 日报（封面图+互动数据+文章直链）。
+<img width="1662" height="1407" alt="image" src="https://github.com/user-attachments/assets/4622e0a2-bd1a-4cfa-8ae2-f0386858ecc6" />
 
 dsh 插件（完整形态：原生工具 + 数据持久化 + 侧栏看板）。支持自定义关键词分页扫描。移植自 [redfox-community](https://github.com/redfox-data/redfox-community) 的 skills/gzh-ai-feed，Python 引擎（daily_report.py 902 行）全量重写为 Node。
 
