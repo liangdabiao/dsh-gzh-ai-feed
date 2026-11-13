@@ -150,11 +150,11 @@
     const feeds = c.feeds || []
     return `
       <header class="head">
-        <span class="eyebrow">WECHAT GZH AI FEED</span>
+        <span class="eyebrow">WECHAT VIRAL RADAR</span>
         <div class="head-row">
-          <h1>公众号<strong>AI信息源</strong></h1>
+          <h1>公众号<strong>爆款雷达</strong></h1>
         </div>
-        <p>每日扫描AI相关公众号，按互动总量发现爆款文章，智能聚类生成深色主题 HTML 日报（封面图+互动数据+文章直链）。接口抓全库热门（无日期过滤），日报日期仅作标注。RedFox API Key ${c.has_key ? '已配置' : '未配置——去「设置」页填写'}。</p>
+        <p>按关键词翻页扫描公众号爆款文章（默认关键词 AI，可换任意关键词），按互动总量发现爆款，智能聚类生成深色主题 HTML 日报（封面图+互动数据+文章直链）。接口抓全库热门（无日期过滤），日报日期仅作标注。RedFox API Key ${c.has_key ? '已配置' : '未配置——去「设置」页填写'}。</p>
       </header>
       ${!c.has_key ? `<div class="empty" style="margin-bottom:var(--sp-6);padding:var(--sp-4) var(--sp-5);text-align:left"><div class="e-title">🔑 还没有配置 RedFox API Key</div><p>到<a href="#/settings">「设置」</a>页填写（ak_ 开头，<a href="https://redfox.hk/settings/api-keys?source=github" target="_blank" rel="noreferrer">红狐 hub 获取 ↗</a>）。接口抓全库热门内容（无日期过滤）。</p></div>` : ''}
       <section class="sec" style="margin-top:0">

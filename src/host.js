@@ -78,7 +78,7 @@ function renderRow(a, idx) {
 export const gzhFeedTool = {
   name: 'gzh_feed',
   description:
-    '公众号爆款雷达：每日扫描AI相关公众号，按互动总量（点赞+评论+分享）发现爆款文章，智能聚类话题，产出深色主题 HTML 日报（封面图+互动数据+文章直链）。支持自定义关键词（如 "AI Agent,RAG,LangChain"）。' +
+    '公众号爆款雷达：按关键词翻页扫描公众号爆款文章（默认关键词 AI/人工智能/大模型/GPT/Agent/AI绘画，可换任意关键词），按互动总量（点赞+评论+分享）发现爆款，智能聚类话题，产出深色主题 HTML 日报（封面图+互动数据+文章直链）。' +
     '接口抓全库热门内容（无日期过滤），日报日期仅作标注（今天16:00后标注昨天，否则标注前天）。' +
     '需要 RedFox API Key（面板「设置」页或环境变量 REDFOX_API_KEY）。',
   parameters: {
